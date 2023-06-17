@@ -80,22 +80,22 @@ public class Conversor {
    */
   private String convertLineData(String line) throws ParseException {
     String[] lineData =  line.split(",");
+    ArrayList<String> result = new ArrayList<>();
 
     String name = lineData[0];
     name = name.toUpperCase();
+    result.add(name);
 
     String birthDate = lineData[1];
     birthDate = convertBirthDate(birthDate);
+    result.add(birthDate);
 
     String email = lineData[2];
+    result.add(email);
 
     String cpf = lineData[3];
-    cpf = convertCpf(cpf);    
+    cpf = convertCpf(cpf);
     
-    ArrayList<String> result = new ArrayList<>();
-    result.add(name);
-    result.add(birthDate);
-    result.add(email);
     result.add(cpf);
     return String.join(",", result);
   }
