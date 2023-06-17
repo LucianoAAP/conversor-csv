@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Comparator;
 import org.junit.jupiter.api.AfterAll;
@@ -55,7 +56,7 @@ public class ConversorTest {
   private static final File pastaDeSaidas = new File(pastaDeTeste, "saidas/");
 
   @BeforeAll
-  public static void antes() throws IOException {
+  public static void antes() throws IOException, ParseException {
     pastaDeEntradas.mkdirs();
     criarArquivoCsv(pastaDeEntradas, "sp.csv", ENTRADA_SP);
     criarArquivoCsv(pastaDeEntradas, "rj.csv", ENTRADA_RJ);
