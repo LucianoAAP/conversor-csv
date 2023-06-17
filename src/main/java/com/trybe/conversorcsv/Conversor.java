@@ -19,7 +19,7 @@ public class Conversor {
    * @param args Não utilizado.
    * @throws IOException Caso ocorra algum problema ao ler os arquivos de entrada ou
    *                     gravar os arquivos de saída.
-   * @throws ParseException 
+   * @throws ParseException Caso haja algum problema ao converter datas
    */
   public static void main(String[] args) throws IOException, ParseException {
     File pastaDeEntradas = new File("./entradas/");
@@ -37,9 +37,10 @@ public class Conversor {
    *
    * @throws IOException Caso ocorra algum problema ao ler os arquivos de entrada ou
    *                     gravar os arquivos de saída.
-   * @throws ParseException 
+   * @throws ParseException Caso haja algum problema ao converter datas
    */
-  public void converterPasta(File pastaDeEntradas, File pastaDeSaidas) throws IOException, ParseException {
+  public void converterPasta(File pastaDeEntradas, File pastaDeSaidas)
+      throws IOException, ParseException {
     if (!pastaDeEntradas.exists()) {
       return;
     }
@@ -74,19 +75,22 @@ public class Conversor {
   
   
   /**
-   * Converte dados da linha
-   * @throws ParseException 
+   * Converte dados da linha.
+   * @throws ParseException Caso haja algum problema ao converter datas
    */
   private String convertLineData(String line) throws ParseException {
     String[] lineData =  line.split(",");
+
     String name = lineData[0];
-    String birthDate = lineData[1];
-    String email = lineData[2];
-    String cpf = lineData[3];
-    
     name = name.toUpperCase();
+
+    String birthDate = lineData[1];
     birthDate = convertBirthDate(birthDate);
-    cpf = convertCpf(cpf);
+
+    String email = lineData[2];
+
+    String cpf = lineData[3];
+    cpf = convertCpf(cpf);    
     
     ArrayList<String> result = new ArrayList<>();
     result.add(name);
@@ -97,8 +101,8 @@ public class Conversor {
   }
   
   /**
-   * Converte data de nascimento
-   * @throws ParseException 
+   * Converte data de nascimento.
+   * @throws ParseException Caso haja algum problema ao converter datas
    */
   private String convertBirthDate(String birthDate) throws ParseException {
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -108,7 +112,7 @@ public class Conversor {
   }
   
   /**
-   * Converte cpf
+   * Converte cpf.
    */
   private String convertCpf(String cpf) {
     String result = "";
@@ -126,16 +130,17 @@ public class Conversor {
   }
 
   /**
-  * Fecha leitores e escritores
+  * Fecha leitores e escritores.
   */
-  private void closeReadersAndWriters(FileReader fileReader, BufferedReader bufferedReader, FileWriter fileWriter, BufferedWriter bufferedWriter) {
+  private void closeReadersAndWriters(FileReader fileReader, BufferedReader bufferedReader,
+      FileWriter fileWriter, BufferedWriter bufferedWriter) {
     try {
-        fileReader.close();
-        bufferedReader.close();
-        fileWriter.close();
-        bufferedWriter.close();
+      fileReader.close();
+      bufferedReader.close();
+      fileWriter.close();
+      bufferedWriter.close();
     } catch (Exception e) {
-        e.printStackTrace();
+      e.printStackTrace();
     }
-}
+  }
 }
