@@ -40,7 +40,7 @@ public class Conversor {
    * @throws ParseException Caso haja algum problema ao converter datas
    */
   public void converterPasta(File pastaDeEntradas, File pastaDeSaidas)
-      throws IOException, ParseException {
+      throws IOException {
     if (!pastaDeEntradas.exists()) {
       return;
     }
@@ -64,7 +64,12 @@ public class Conversor {
       }
       
       while (lineContent != null) {
-        bufferedWriter.write(convertLineData(lineContent));
+        try {
+          bufferedWriter.write(convertLineData(lineContent));
+        } catch (ParseException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
         bufferedWriter.newLine();
         lineContent = bufferedReader.readLine();
       }      
